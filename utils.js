@@ -11,3 +11,29 @@ function getObjKey(arr, key) {
 		return item[key];
 	});
 }
+
+/**
+ * Utility function to grab the console in the dev tools and puts it in window.log
+ * variable
+ *
+ * @method grabber
+ * @param tag {Regex} Any regular expression
+ */
+function grabber(tag) {
+	var tag = tag;
+	var old = console.log;
+	window.log = [];
+	(function() {
+		console.log = function() {
+			if (arguments[0].match(tag, "i")) {
+				Array.prototype.shift.call(arguments);
+				Array.prototype.forEach.call(arguments, function(arg) {
+					window.log.push(arg);
+				});
+				old.apply(this, arguments);
+			} else {
+				old.apply(this, arguments);
+			}
+		}
+	}());
+}

@@ -21,7 +21,6 @@ function getObjKey(arr, key) {
 */
 ;(function(grabber) {
 	'use strict';
-	debugger;
 	var old = console.log;
 	var log = function(tag, pocket) {
 		var tag = tag,
